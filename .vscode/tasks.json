@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "g++ build active file",   // Task name
+        "type": "shell",                    // Task type: shell command
+        "command": "/usr/bin/g++",          // Path to g++ compiler (adjust for your system)
+        "args": [
+          "-g",                             // Enable debugging symbols
+          "${file}",                        // Input: the active file
+          "-o",                             // Output flag
+          "${fileDirname}/${fileBasenameNoExtension}"  // Output file: same directory, same name
+        ],
+        "group": {
+          "kind": "build",                  // Define this task as a build task
+          "isDefault": true                 // Mark it as the default task
+        },
+        "problemMatcher": ["$gcc"],         // Automatically detect errors and warnings from gcc/g++
+        "detail": "Generated task for building C++ file." // Optional description
+      }
+    ]
+ }
+ 

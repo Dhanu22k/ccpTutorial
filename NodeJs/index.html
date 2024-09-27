@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Info</title>
+</head>
+<body>
+    <h1>Client Information</h1>
+
+    <script>
+        // Function to collect browser and hardware info
+        function getClientInfo() {
+            const clientInfo = {
+                browser: `${navigator.appName} ${navigator.appVersion}`,
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                language: navigator.language,
+                timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                cpuCores: navigator.hardwareConcurrency || 'Unknown',
+                deviceMemory: navigator.deviceMemory || 'Unknown',
+                gpu: (function() {
+                    let canvas = document.createElement('canvas');
+                    let gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    if (gl) {
+                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                        return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown GPU';
+                    }
+                    return 'Unknown GPU';
+                })(),
+                fonts: (function() {
+                    const fonts = ['Arial', 'Courier New', 'Georgia', 'Times New Roman', 'Verdana'];
+                    return fonts.filter(font => {
+                        const span = document.createElement('span');
+                        span.style.fontFamily = font;
+                        span.style.visibility = 'hidden';
+                        span.innerHTML = 'test';
+                        document.body.appendChild(span);
+                        const isFontAvailable = span.offsetWidth > 0 && span.offsetHeight > 0;
+                        document.body.removeChild(span);
+                        return isFontAvailable;
+                    });
+                })()
+            };
+
+            return clientInfo;
+        }
+
+        // Log the info in the console
+        const clientInfo = getClientInfo();
+        console.log("Client Info: ", clientInfo);
+
+        // Send the info to the server
+        fetch('/client-info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(clientInfo)
+        }).then(response => response.json())
+          .then(data => console.log("Server response:", data))
+          .catch(error => console.error("Error:", error));
+    </script>
+</body>
+</html>
