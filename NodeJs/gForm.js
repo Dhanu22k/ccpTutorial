@@ -28,13 +28,11 @@ const formatDate = (dob) => {
 
     for (const entry of data) {
         // Navigate to the form
-        await page.goto('https://forms.gle/jNtTXsRg29rH4yfR9');
+        await page.goto('https://forms.gle/r5TSTm74YWBAALbu7');
         
         // Fill in the form fields
-        await page.type('input[type=text]', entry.Name || ''); // Name
-
+         await page.type('input[aria-labelledby=i1]', entry.Name || ''); // Name
         // Format and enter Date of Birth
-        console.log(entry.DOB);
         const formattedDOB = formatDate(entry.DOB || '');
         await page.type('input[aria-labelledby=i9]', formattedDOB); // Date of Birth
 

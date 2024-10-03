@@ -3,7 +3,6 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
-
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, 'index.html'));
   console.log(req.ip)
