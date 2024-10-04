@@ -30,11 +30,6 @@ app.get('/', (req, res) => {
   console.log(req.ip);
 });
 
-app.get('/second', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, 'secondPage.html'));
-  console.log(req.ip);
-});
-
 
 // Handle the POST request to accept name and file
 app.post('/upload', upload.single('file'), (req, res) => {
@@ -51,17 +46,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
   // Respond back to the client with success message
   res.status(200).json({ message: 'File uploaded successfully!', name, filename: file.filename });
-});
-
-
-app.post('/upload',  (req, res) => {
-  //const { name } = req.body;  // Get user's name from form data
-        // Get the uploaded file info from multer
-
-  console.log("Received Client Info: ", req.body.name);
-
-  // Respond back to the client with success message
-  res.status(200).json({message: 'File uploaded successfully!'});
 });
 
 

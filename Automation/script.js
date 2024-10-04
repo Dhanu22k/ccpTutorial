@@ -37,7 +37,7 @@ const readExcelData = (filePath) => {
         const inputUploadHandle = await page.$(inputFileSelector);
 
         if (inputUploadHandle) {
-            await inputUploadHandle.uploadFile(ImagePath);
+            await inputUploadHandle.uploadFile(fullImagePath);
             console.log(`File uploaded for: ${Name}`);
         } else {
             console.error(`File input not found for: ${Name}`);
@@ -48,14 +48,14 @@ const readExcelData = (filePath) => {
 
         try {
             // Wait for a success message or similar element after submission
-            await new Promise(resolve => setTimeout(resolve, 3000)); // 3-second delay after form submission
+            await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay after form submission
             console.log(`Form submitted successfully for: ${Name}`);
         } catch (error) {
             console.error(`Form submission failed for: ${Name}. Error:`, error);
         }
 
         // Wait between submissions
-        await new Promise(resolve => setTimeout(resolve, 2000)); // 2-second delay
+        await new Promise(resolve => setTimeout(resolve, 100)); 
     }
 
     // Close the browser after all forms are submitted
