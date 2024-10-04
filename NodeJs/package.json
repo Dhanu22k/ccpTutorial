@@ -2,9 +2,21 @@
   "dependencies": {
     "express": "^4.21.0",
     "https": "^1.0.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.7",
-    "puppeteer": "^23.4.1",
-    "puppeteer-core": "^23.4.1",
+    "puppeteer": "^23.5.0",
+    "puppeteer-core": "^23.5.0",
     "xlsx": "^0.18.5"
-  }
+  },
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "FormAuto.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
